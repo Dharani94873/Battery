@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Outer Battery Body Outline representing charge level and guard state -->
+    <path
+        android:fillColor="#10B981"
+        android:pathData="M38,28 C38,24.7 40.7,22 44,22 L46,22 C46,20.3 47.3,19 49,19 L59,19 C60.7,19 62,20.3 62,22 L64,22 C67.3,22 70,24.7 70,28 L70,82 C70,85.3 67.3,88 64,88 L44,88 C40.7,88 38,85.3 38,82 Z M44,27 C43.4,27 43,27.4 43,28 L43,82 C43,82.6 43.4,83 44,83 L64,83 C64.6,83 65,82.6 65,82 L65,28 C65,27.4 64.6,27.0 64,27.0 Z" />
+
+    <!-- Lightning Bolt Icon in the Center (Active Optimization symbol) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M55,34 L45,49 L53,49 L49,71 L61,53 L53,53 Z" />
+
+</vector>

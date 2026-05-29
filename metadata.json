@@ -1,0 +1,6 @@
+{
+  "name": "Battery Optimizer",
+  "description": "Calculates battery percentage and health, and alerts you when charging is optimized to maximize battery lifespan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
