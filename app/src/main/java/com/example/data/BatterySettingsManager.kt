@@ -13,7 +13,8 @@ data class BatterySettings(
     val highLimitThreshold: Int = 80,
     val lowLimitThreshold: Int = 20,
     val tempThreshold: Float = 40f,
-    val calibratedHealthPct: Int = 96 // Default estimate that gets updated via diagnostic scan
+    val calibratedHealthPct: Int = 96, // Default estimate that gets updated via diagnostic scan
+    val useFahrenheit: Boolean = false
 )
 
 class BatterySettingsManager(context: Context) {
@@ -30,7 +31,8 @@ class BatterySettingsManager(context: Context) {
             highLimitThreshold = prefs.getInt("high_limit_threshold", 80),
             lowLimitThreshold = prefs.getInt("low_limit_threshold", 20),
             tempThreshold = prefs.getFloat("temp_threshold", 40f),
-            calibratedHealthPct = prefs.getInt("calibrated_health_pct", 96)
+            calibratedHealthPct = prefs.getInt("calibrated_health_pct", 96),
+            useFahrenheit = prefs.getBoolean("use_fahrenheit", false)
         )
     }
 
@@ -67,5 +69,10 @@ class BatterySettingsManager(context: Context) {
     fun updateCalibratedHealthPct(value: Int) {
         prefs.edit().putInt("calibrated_health_pct", value).apply()
         _settings.value = _settings.value.copy(calibratedHealthPct = value)
+    }
+
+    fun updateUseFahrenheit(value: Boolean) {
+        prefs.edit().putBoolean("use_fahrenheit", value).apply()
+        _settings.value = _settings.value.copy(useFahrenheit = value)
     }
 }

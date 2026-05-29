@@ -106,6 +106,34 @@ class BatteryMonitorService : Service() {
         val isCharging = statusCode == BatteryManager.BATTERY_STATUS_CHARGING || 
                            statusCode == BatteryManager.BATTERY_STATUS_FULL
 
+        val batteryManager = getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+        var currentMicroAmps = batteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW)
+        if (currentMicroAmps == Long.MIN_VALUE || currentMicroAmps == Long.MAX_VALUE) {
+            currentMicroAmps = 0
+        }
+        // standard android microAmps to milliAmps
+        val currentNow = (currentMicroAmps / 1000).toInt()
+
+        var chargeCounterMicroAmpHours = batteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER)
+        if (chargeCounterMicroAmpHours == Long.MIN_VALUE || chargeCounterMicroAmpHours == Long.MAX_VALUE || chargeCounterMicroAmpHours <= 0) {
+            chargeCounterMicroAmpHours = (percentage * 4000).toLong() * 1000L
+        }
+        val chargeCounter = (chargeCounterMicroAmpHours / 1000).toInt()
+
+        val technology = intent.getStringExtra(BatteryManager.EXTRA_TECHNOLOGY) ?: "Li-ion"
+        val watts = (voltage / 1000f) * (kotlin.math.abs(currentNow) / 1000f)
+
+        val powerManager = getSystemService(Context.POWER_SERVICE) as android.os.PowerManager
+        val isPowerSaveMode = powerManager.isPowerSaveMode
+
+        var cycleCount = 0
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            val cycles = batteryManager.getIntProperty(6) // 6 represents BatteryManager.BATTERY_PROPERTY_CYCLE_COUNT
+            if (cycles >= 0) {
+                cycleCount = cycles
+            }
+        }
+
         // Post status update to UI dynamically via public state flow if requested, but let's write to database
         // so that the UI can observe database logs or write to a global StateFlow that exists on this Service.
         _serviceState.value = ServiceBatteryState(
@@ -115,7 +143,13 @@ class BatteryMonitorService : Service() {
             voltage = voltage,
             status = statusStr,
             isCharging = isCharging,
-            pluggedType = getPluggedString(pluggedCode)
+            pluggedType = getPluggedString(pluggedCode),
+            currentNow = currentNow,
+            chargeCounter = chargeCounter,
+            technology = technology,
+            watts = watts,
+            isPowerSaveMode = isPowerSaveMode,
+            cycleCount = cycleCount
         )
 
         // Update foreground notification display
@@ -399,5 +433,11 @@ data class ServiceBatteryState(
     val voltage: Int,
     val status: String,
     val isCharging: Boolean,
-    val pluggedType: String
+    val pluggedType: String,
+    val currentNow: Int,
+    val chargeCounter: Int,
+    val technology: String,
+    val watts: Float,
+    val isPowerSaveMode: Boolean = false,
+    val cycleCount: Int = 0
 )

@@ -15,34 +15,38 @@ private val DarkColorScheme =
     primary = EmeraldGreen,
     secondary = ElectricCyan,
     tertiary = WarningAmber,
-    background = TechDarkBg,
-    surface = TechCardBg,
-    onPrimary = TechDarkBg,
-    onSecondary = TechDarkBg,
-    onBackground = TextPrimaryDark,
-    onSurface = TextPrimaryDark,
-    outline = TechCardBorder
+    background = SlateDarkBg,
+    surface = SolidDarkSurface,
+    onPrimary = PureWhiteSurface,
+    onSecondary = PureWhiteSurface,
+    onBackground = SoftLightBg,
+    onSurface = SoftLightBg,
+    outline = DesignOutlineDark,
+    surfaceVariant = SolidDarkSurface,
+    onSurfaceVariant = TextSlateMuted
   )
 
 private val LightColorScheme =
-  darkColorScheme( // Even light theme is clean dark tech style for extreme battery saving!
+  lightColorScheme(
     primary = EmeraldGreen,
     secondary = ElectricCyan,
     tertiary = WarningAmber,
-    background = TechDarkBg,
-    surface = TechCardBg,
-    onPrimary = TechDarkBg,
-    onSecondary = TechDarkBg,
-    onBackground = TextPrimaryDark,
-    onSurface = TextPrimaryDark,
-    outline = TechCardBorder
+    background = SoftLightBg, // Professional pristine light off-white background
+    surface = PureWhiteSurface, // Pure professional white surface
+    onPrimary = PureWhiteSurface,
+    onSecondary = PureWhiteSurface,
+    onBackground = TextSlatePrimary, // Deep slate elegant dark text
+    onSurface = TextSlatePrimary,
+    outline = DesignOutlineLight, // Soft grey boundary line
+    surfaceVariant = SoftLightBg,
+    onSurfaceVariant = TextSlateSecondary // Professional gray secondary text
   )
 
 @Composable
 fun MyApplicationTheme(
-  darkTheme: Boolean = isSystemInDarkTheme(),
-  // Dynamic color is available on Android 12+
-  dynamicColor: Boolean = true,
+  darkTheme: Boolean = false, // Always default to the pristine, professional white theme
+  // Disable dynamic color by default to guarantee our pristine white-and-emerald curated experience
+  dynamicColor: Boolean = false,
   content: @Composable () -> Unit,
 ) {
   val colorScheme =

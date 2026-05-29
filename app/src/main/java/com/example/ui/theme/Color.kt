@@ -1,26 +1,31 @@
 package com.example.ui.theme
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.runtime.Composable
 
-// Premium Slate & Emerald Tech Palette
-val TechDarkBg = Color(0xFF0D121F)      // Dark Cosmic Blue-Grey
-val TechCardBg = Color(0xFF161F33)      // Solid Slate Blue
-val TechCardBorder = Color(0xFF24324F)  // Slate Blue Border
+// Light Colors (Professional Slate / Off-White / Emerald)
+val SoftLightBg = Color(0xFFF8FAFC)       // Cool slate light grey
+val PureWhiteSurface = Color(0xFFFFFFFF)  // Clean pristine white
+val TextSlatePrimary = Color(0xFF0F172A)  // Dark elegant blue-grey
+val TextSlateSecondary = Color(0xFF475569)// Medium gray
+val TextSlateMuted = Color(0xFF94A3B8)    // Light slate gray
+val DesignOutlineLight = Color(0xFFE2E8F0)// Soft border contour
 
-val EmeraldGreen = Color(0xFF10B981)    // Emerald (Optimal Charging Range)
-val EmeraldGlow = Color(0xFF34D399)     // Soft Emerald Glow
-val ElectricCyan = Color(0xFF00B0FF)    // Cyan (Active Standard Charge)
-val WarningAmber = Color(0xFFFFA000)    // Amber/Gold (Thermal & Discharging Caution)
-val DangerRose = Color(0xFFF5222D)      // Crimson (Critical Limits)
+// Dark Colors (Obsidian / Dark Teal / Cyan)
+val SlateDarkBg = Color(0xFF0F172A)       // Deep slate obsidian
+val SolidDarkSurface = Color(0xFF1E293B)  // Dark slate card surface
+val DesignOutlineDark = Color(0xFF334155)  // Dark border contour
 
-val TextPrimaryDark = Color(0xFFF1F5F9)  // High-Contrast White-Slate
-val TextSecondaryDark = Color(0xFF94A3B8) // Muted Info Slate
+// Dynamic State Accents
+val EmeraldGreen = Color(0xFF10B981)      // Green (Optimal / Healthy State)
+val EmeraldGlow = Color(0xFF34D399)       // Soft green glow
+val ElectricCyan = Color(0xFF3B82F6)      // Sapphire Blue / Cyan (Charging standard)
+val WarningAmber = Color(0xFFF59E0B)      // Warm amber (Warning/Wear)
+val DangerRose = Color(0xFFEF4444)        // Alert red (Critical limits)
 
-// Original style mappings to avoid any compiler references
-val Purple80 = Color(0xFF10B981)
-val PurpleGrey80 = Color(0xFF161F33)
-val Pink80 = Color(0xFF00B0FF)
-
-val Purple40 = Color(0xFF0D121F)
-val PurpleGrey40 = Color(0xFF24324F)
-val Pink40 = Color(0xFFF5222D)
+// Compat mappings to retain any legacy references
+val TechDarkBg @Composable get() = androidx.compose.material3.MaterialTheme.colorScheme.background
+val TechCardBg @Composable get() = androidx.compose.material3.MaterialTheme.colorScheme.surface
+val TechCardBorder @Composable get() = androidx.compose.material3.MaterialTheme.colorScheme.outline
+val TextPrimaryDark @Composable get() = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
+val TextSecondaryDark @Composable get() = androidx.compose.material3.MaterialTheme.colorScheme.onSurfaceVariant

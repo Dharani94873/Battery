@@ -34,4 +34,5 @@ class BatteryRepository(
     fun setLowLimit(limit: Int) = settingsManager.updateLowLimitThreshold(limit)
     fun setTempThreshold(temp: Float) = settingsManager.updateTempThreshold(temp)
     fun setCalibratedHealth(pct: Int) = settingsManager.updateCalibratedHealthPct(pct)
+    fun setUseFahrenheit(enabled: Boolean) = settingsManager.updateUseFahrenheit(enabled)
 }
